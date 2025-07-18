@@ -1,34 +1,56 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, ImageBackground } from 'react-native';
 import React from 'react';
 
+
+import { AudioPlayer, useAudioPlayer } from 'expo-audio';
+
+const audioSource = require('../assets/audio/btninicio.mp3');
+
 export default function WelcomeScreen({ navigation }: any) {
+
+  const player = useAudioPlayer(audioSource);
+
+
     return (
         <ImageBackground
-        style={styles.container}
-    source={{uri :"https://images.pexels.com/photos/1287142/pexels-photo-1287142.jpeg"}}
-    
-    
-        >  
+            style={styles.container}
+            source={{ uri: "https://images.pexels.com/photos/1287142/pexels-photo-1287142.jpeg" }}
+
+
+        >
             <Text style={styles.title}>Bienvenido!</Text>
             <Text style={styles.title}>Registrate o Inicia Sesion para comenzar esta grandiosa lectura!</Text>
 
-           <Image 
+            <Image
                 source={{ uri: 'https://images.pexels.com/photos/10584999/pexels-photo-10584999.jpeg' }}
                 style={styles.image}
-                
             />
 
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
+            <TouchableOpacity style={styles.button} 
+
+
+onPress={() => {
+                player.seekTo(0);
+                player.play();
+                navigation.navigate('Login')}}>
+
+
+
+
                 <Text style={styles.buttonText}>Iniciar Sesion</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Register')}>
+            <TouchableOpacity style={styles.button} onPress={() => 
+            {
+                player.seekTo(0);
+                player.play();
+                navigation.navigate('Register')}}>
                 <Text style={styles.buttonText}>Registrarse</Text>
             </TouchableOpacity>
 
-            </ImageBackground>
-        
-        
+        </ImageBackground>
+
+
     );
 }
 
@@ -46,7 +68,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         color: '#251554',
         textAlign: 'center'
-        
+
     },
 
     image: {
@@ -54,8 +76,8 @@ const styles = StyleSheet.create({
         height: 300,
         marginBottom: 30,
         opacity: 0.7,
-        resizeMode:'contain'
-        
+        resizeMode: 'contain'
+
     },
 
     button: {
